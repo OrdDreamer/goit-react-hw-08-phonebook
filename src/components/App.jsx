@@ -1,50 +1,46 @@
 import styles from './app.module.css';
-import Section from './Section/Section';
-import { PhonebookForm } from './PhonebookForm/PhonebookForm';
-import ContactsList from './ContactsList/ContactsList';
-import Filter from './Filter/Filter';
-import Loader from './Loader/Loader';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectError, selectIsLoading } from '../redux/selectors';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from '../redux/operations';
-import ErrorView from './ErrorView/ErrorView';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './Layout/Layout';
+import { refreshUser } from '../redux/auth/operations';
+import { useAuth } from '../hooks/useAuth';
+import Home from '../pages/Home/Home';
+import RestrictedRoute from './RestrictedRoute';
+import Registration from '../pages/Registration/Registration';
+import Login from '../pages/Login/Login';
+import PrivateRoute from './PrivateRoute';
+import Contacts from '../pages/Contacts/Contacts';
+import Navigation from './Navigation/Navigation';
 
 export const App = () => {
 
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'start',
-        alignItems: 'center',
-        color: '#010101',
-        padding: '50px',
-        backgroundColor: 'rgb(231, 236, 242)',
-        boxSizing: 'border-box',
-      }}
-    >
-      <div className={styles.phonebook}>
-        {isLoading && <Loader />}
-        {error && <ErrorView />}
-        <Section title={'Phonebook'}>
-          <PhonebookForm />
-        </Section>
-        <Filter />
-        <Section title={'Contacts List'}>
-          <ContactsList />
-        </Section>
-      </div>
-    </div>
+    <Layout>
+      <Navigation />
+      {isRefreshing
+        ? (<p className={styles.refreshingText}>Refreshing user...</p>)
+        : (
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={
+              <RestrictedRoute redirectTo='/contacts' element={<Login />} />
+            } />
+            <Route path='/register' element={
+              <RestrictedRoute redirectTo='/contacts' element={<Registration />} />
+            } />
+            <Route path='/contacts' element={
+              <PrivateRoute redirectTo='/login' element={<Contacts />} />
+            } />
+          </Routes>
+        )}
+    </Layout>
   );
 };

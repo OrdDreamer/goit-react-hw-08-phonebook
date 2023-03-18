@@ -1,0 +1,30 @@
+.navContainer {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  padding: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin: 0 auto 0 0;
+  font-size: 26px;
+  color: #a5a5a5;
+  text-decoration: none;
+}
+
+.navLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  height: 30px;
+  color: #010101;
+}
+
+.navLinkActive {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+}

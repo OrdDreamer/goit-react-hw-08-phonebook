@@ -1,7 +1,7 @@
 import styles from './filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSearchQuery } from '../../redux/selectors';
-import { changeSearchQuery } from '../../redux/slices/filtersSlice';
+import { selectSearchQuery } from '../../redux/filters/selectors';
+import { changeSearchQuery } from '../../redux/filters/slice';
 
 const Filter = () => {
 

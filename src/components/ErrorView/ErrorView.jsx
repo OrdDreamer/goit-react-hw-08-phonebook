@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
-import { selectError } from '../../redux/selectors';
 import styles from './error-view.module.css';
+import PropTypes from 'prop-types';
 
-const ErrorView = () => {
-  const error = useSelector(selectError);
+const ErrorView = ({ error }) => {
 
   return (
     <div className={styles.container}>
@@ -16,3 +14,7 @@ const ErrorView = () => {
 }
 
 export default ErrorView;
+
+ErrorView.propTypes = {
+  error: PropTypes.string.isRequired,
+}

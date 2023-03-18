@@ -1,0 +1,41 @@
+.container {
+  padding: 10px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 32px;
+  text-align: center;
+  padding-bottom: 44px;
+  position: relative;
+}
+
+.bestText {
+  color: #09b600;
+  text-decoration: underline;
+}
+
+.title::before, .title::after {
+  content: "ZSU";
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  line-height: 1;
+  font-size: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.title::before {
+  color: rgb(255, 209, 0);
+  bottom: 0;
+}
+
+.title::after {
+  color: rgb(0, 130, 209);
+  height: 22px;
+  bottom: 22px;
+}
