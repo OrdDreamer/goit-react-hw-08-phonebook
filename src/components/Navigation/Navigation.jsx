@@ -1,7 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import styles from './navigation.module.css';
 import { useAuth } from '../../hooks/useAuth';
-import { useDispatch } from 'react-redux';
 import UserMenu from '../UserMenu/UserMenu';
 
 const Navigation = () => {
