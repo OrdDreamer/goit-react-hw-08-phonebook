@@ -17,7 +17,7 @@ const logOut = async () => {
 };
 
 const refreshUser = async () => {
-  const { data } = await axios.post('/users/current');
+  const { data } = await axios.get('/users/current');
   return data;
 };
 
